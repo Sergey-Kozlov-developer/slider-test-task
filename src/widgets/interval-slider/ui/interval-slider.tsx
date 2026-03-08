@@ -115,6 +115,15 @@ export const IntervalSlider = () => {
             intervalStart={intervalStart}
             intervalEnd={intervalEnd}
           />
+          {windowDimensions.width <= 768 && (
+            <Slider
+              slides={slides}
+              sliderTitle={sliderTitle}
+              sliderInAnim={sliderInAnim}
+              windowWidth={windowDimensions.width}
+              sliderRef={sliderRef}
+            />
+          )}
         </Wrapper>
         {windowDimensions.width > 768 && (
           <Slider
