@@ -1,6 +1,7 @@
 import { Spinner } from "@features/spinner";
 import { data, IntervalSliders } from "@shared/data/history-dates";
 import { getWindowDimensions } from "@shared/model";
+import { Slider } from "@widgets/interval-slider/ui/slider";
 import {
   Content,
   IntervalSliderRoot,
@@ -9,6 +10,7 @@ import {
   Wrapper,
 } from "@widgets/interval-slider/ui/styled/interval-slider.styled";
 import React from "react";
+import { SwiperRef } from "swiper/react";
 
 export const IntervalSlider = () => {
   const [intervalSliders] = React.useState<IntervalSliders>(data);
@@ -22,9 +24,19 @@ export const IntervalSlider = () => {
   );
   const [sliderInAnim, setSliderInAnim] = React.useState(false);
 
+  const [slides, setSlides] = React.useState(
+    intervalSliders[intervalIndex].slides,
+  );
+
+  const [sliderTitle, setSliderTitle] = React.useState(
+    intervalSliders[intervalIndex].name,
+  );
+
   const [windowDimensions, setWindowDimensions] = React.useState(
     getWindowDimensions(),
   );
+
+  const sliderRef = React.useRef<SwiperRef | null>(null);
 
   /*
    *   Interval update logic
@@ -104,6 +116,15 @@ export const IntervalSlider = () => {
             intervalEnd={intervalEnd}
           />
         </Wrapper>
+        {windowDimensions.width > 768 && (
+          <Slider
+            slides={slides}
+            sliderTitle={sliderTitle}
+            sliderInAnim={sliderInAnim}
+            windowWidth={windowDimensions.width}
+            sliderRef={sliderRef}
+          />
+        )}
       </Content>
     </IntervalSliderRoot>
   );
