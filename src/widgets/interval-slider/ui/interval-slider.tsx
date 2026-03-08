@@ -5,12 +5,19 @@ import { Slider } from "@widgets/interval-slider/ui/slider";
 import {
   Content,
   IntervalSliderRoot,
+  Navigation,
+  NavigationArrow,
+  NavigationControls,
+  NavigationProgress,
+  NavigationWrapper,
+  Pagination,
   Title,
   TitleText,
   Wrapper,
 } from "@widgets/interval-slider/ui/styled/interval-slider.styled";
 import React from "react";
 import { SwiperRef } from "swiper/react";
+import Arrow from "@assets/arrow.svg";
 
 export const IntervalSlider = () => {
   const [intervalSliders] = React.useState<IntervalSliders>(data);
@@ -125,6 +132,32 @@ export const IntervalSlider = () => {
             />
           )}
         </Wrapper>
+        <Navigation>
+          <NavigationWrapper>
+            <NavigationProgress>
+              {String(intervalIndex + 1).padStart(2, "0")}/
+              {String(intervalSliders.length).padStart(2, "0")}
+            </NavigationProgress>
+            <NavigationControls>
+              <NavigationArrow
+                $direction="prev"
+                $disabled={isFirstInterval}
+                onClick={() => !isFirstInterval && updateIntervalIndex(-1)}
+              >
+                <Arrow />
+              </NavigationArrow>
+              <NavigationArrow
+                $direction="next"
+                $disabled={isLastInterval}
+                onClick={() => !isLastInterval && updateIntervalIndex(1)}
+              >
+                <Arrow />
+              </NavigationArrow>
+            </NavigationControls>
+          </NavigationWrapper>
+          <Pagination className="slider-pagination" />
+        </Navigation>
+
         {windowDimensions.width > 768 && (
           <Slider
             slides={slides}

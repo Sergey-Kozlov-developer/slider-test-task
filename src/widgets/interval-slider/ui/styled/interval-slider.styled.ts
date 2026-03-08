@@ -84,3 +84,79 @@ export const Wrapper = styled.div`
     }
   }
 `;
+
+export const Navigation = styled.div`
+  display: flex;
+  padding-left: ${calcFluid(0, 80)};
+  margin-bottom: ${calcFluid(0, 56)};
+`;
+
+export const NavigationWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`;
+
+export const NavigationProgress = styled.div`
+  font-size: ${calcFluid(14, 16)};
+`;
+
+export const NavigationControls = styled.div`
+  display: flex;
+  gap: 20px;
+`;
+
+interface NavigationArrowProps {
+  $direction: "prev" | "next";
+  $disabled: boolean;
+}
+
+export const NavigationArrow = styled.div<NavigationArrowProps>`
+  cursor: ${({ $disabled }) => ($disabled ? "default" : "pointer")};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: ${calcFluid(20, 50)};
+  height: ${calcFluid(20, 50)};
+  border-radius: 50%;
+  border: 1px solid rgba(66, 86, 122, 0.5);
+  opacity: ${({ $disabled }) => ($disabled ? 0.5 : 1)};
+  transition: opacity 0.1s ease-in-out;
+
+  svg {
+    stroke: #42567a;
+    transform: ${({ $direction }) =>
+      $direction === "next" ? "rotate(180deg)" : "none"};
+
+    @media screen and (max-width: 769px) {
+      width: 25%;
+    }
+  }
+
+  &:hover {
+    opacity: ${({ $disabled }) => ($disabled ? 0.5 : 0.8)};
+  }
+`;
+
+export const Pagination = styled.div`
+  @media screen and (max-width: 769px) {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: ${calcFluid(40, 80)};
+
+    .swiper-pagination-bullet {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      background-color: rgba(66, 86, 122, 1);
+      border-radius: 50%;
+      opacity: 0.4;
+      transition: opacity 0.5s ease-in-out;
+
+      &-active {
+        opacity: 1;
+      }
+    }
+  }
+`;
