@@ -45,10 +45,6 @@ export const IntervalSlider = () => {
 
   const sliderRef = React.useRef<SwiperRef | null>(null);
 
-  /*
-   *   Interval update logic
-   */
-  // переключение на следующий или предыдущий интервал
   const isFirstInterval = intervalIndex === 0;
   const isLastInterval = intervalIndex === intervalSliders.length - 1;
   const updateIntervalIndex = React.useCallback(
